@@ -15,6 +15,8 @@ const Photos = () => {
 
     axios.defaults.withCredentials = true;
 
+    const [newPublicId, setNewPublicId] = useState('')
+
     const logout = () => {
         axios.get('http://localhost:5000/logout').then(response => {
             if(response.data.message){
@@ -53,7 +55,6 @@ const Photos = () => {
             const img_height = res.height;
             const img_width = res.width;
             const id = localStorage.getItem('id')
-        
             axios.post('http://localhost:5000/upload', {
                 publicId: img_publicId,
                 fileName: img_fileName,
@@ -95,13 +96,40 @@ const Photos = () => {
             uid: id
         }).then((response) => {
             setImagesList(response.data)
+            console.log(response.data.publicId)
         })
     }
 
+    const updateImage = (publicId) => {
+        axios.put('http://localhost:5000/update', {newPublicId: newPublicId, publicId: publicId}).then((response) => {
+            setImagesList(imagesList.map((val) => {
+                return val.publicId == publicId ? {
+                    publicId: val.publicId,
+                    fileName: val.fileName,
+                    uploadDate: val.uploadDate,
+                    secureUrl: val.secureUrl,
+                    size_in_mb: val.size_in_mb,                
+                    format: val.format,                                
+                    height: val.height,
+                    width: val.width,
+                    user_id: val.user_id
+                } : val
+            }))
+        })
+    }
+
+    const deleteImage = (publicId) => {
+        axios.delete(`http://localhost:5000/delete/${publicId}`).then((response) => {
+            setImagesList(imagesList.filter((val) => {
+                return val.publicId != publicId
+            }))
+        })
+    }
 
     useEffect(() => {        
         axios.get('http://localhost:5000/images').then((response) => {
             setImagesList(response.data)
+            console.log(response.data)
         })
     }, [])
 
@@ -121,10 +149,15 @@ const Photos = () => {
             <button onClick={showImages}>Show images</button>            
             {imagesList.map((val, key) => {
                 return (
-                    <div className="image">
-                        <div>
-                            <img src={val.secureUrl}/>
-                        </div>                        
+                    <div>
+                        <div className="image">
+                            <img src={val.secureUrl}/>   
+                            <input type='text' placeholder='Update public id' onChange={(event) => {
+                                setNewPublicId(event.target.value);
+                            }}/>
+                            <button onClick={() => {updateImage(val.publicId)}}>Update</button>
+                            <button onClick={() => {deleteImage(val.publicId)}}>Delete</button>
+                        </div>
                     </div>
                 )
             })}
