@@ -12,7 +12,10 @@ const path = require('path');
 const localstorage = require('node-localstorage');
 const store = require('store2');
 const router = express.Router();
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const fs = require('fs');
+const request = require('request')
+const fetch = require('fetch');
 
 const app = express();
 
@@ -203,6 +206,11 @@ app.delete('/delete/:publicId', (req, res) => {
             })
         }
     });
+})
+
+app.get('/download/:publicId', (req, res) => {
+    const publicId = req.params.publicId;
+    
 })
 
 app.listen(5000, () => {

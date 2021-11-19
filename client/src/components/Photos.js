@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory, withRouter } from 'react-router-dom';
+import UrlImageDownloader from 'react-url-image-downloader';
 
 const Photos = () => {
 
@@ -126,6 +127,16 @@ const Photos = () => {
         })
     }
 
+    const downloadImage = (publicId) => {
+        axios.get(`http://localhost:5000/download/${publicId}`).then((response) => {
+            if(response){
+                console.log(response)
+            } else {
+                console.log('error downloading')
+            }
+        })
+    }
+
     useEffect(() => {        
         axios.get('http://localhost:5000/images').then((response) => {
             setImagesList(response.data)
@@ -157,6 +168,9 @@ const Photos = () => {
                             }}/>
                             <button onClick={() => {updateImage(val.publicId)}}>Update</button>
                             <button onClick={() => {deleteImage(val.publicId)}}>Delete</button>
+                            <a href="">
+                                <UrlImageDownloader imageUrl={val.secureUrl}/>                                
+                            </a>
                         </div>
                     </div>
                 )
