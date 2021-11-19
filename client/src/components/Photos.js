@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory, withRouter } from 'react-router-dom';
-import UrlImageDownloader from 'react-url-image-downloader';
+import { saveAs } from 'file-saver'
 
 const Photos = () => {
 
@@ -110,7 +110,7 @@ const Photos = () => {
     }
 
     const updateImage = (publicId) => {
-        axios.put('http://localhost:5000/update', {newPublicId: newPublicId, publicId: publicId}).then((response) => {
+        axios.put('http://localhost:5000/update', {newPublicId: newPublicId, publicId: publicId}).then((response) => {            
             setImagesList(imagesList.map((val) => {
                 return val.publicId == publicId ? {
                     publicId: val.publicId,
@@ -123,7 +123,7 @@ const Photos = () => {
                     width: val.width,
                     user_id: val.user_id
                 } : val
-            }))            
+            }))
         })
     }
 
@@ -135,22 +135,14 @@ const Photos = () => {
         })
     }
 
-    const downloadImage = (publicId) => {
-        axios.get(`http://localhost:5000/download/${publicId}`).then((response) => {
-            if(response){
-                console.log(response)
-            } else {
-                console.log('error downloading')
-            }
-        })
-    }
-
     useEffect(() => {        
         axios.get('http://localhost:5000/images').then((response) => {
             setImagesList(response.data)
             console.log(response.data)            
         })
     }, [])
+
+    const user = localStorage.getItem('user')
 
     return (
         <div>
@@ -161,7 +153,7 @@ const Photos = () => {
                     <span className="font-semibold text-xl tracking-tight"><b>Com</b>gallery</span>
                 </div>
                 <div className="w-1/5 flex items-center justify-around">
-                    <p className="text-white">email</p>
+                    <p className="text-white">{user}</p>
                     <button onClick={logout}
                         className="text-white rounded-lg px-2 py-1 bg-red-500 hover:bg-red-800 duration-300"
                     >
@@ -202,6 +194,7 @@ const Photos = () => {
                                 </div>
                                 <img 
                                     className="w-full h-60 rounded"
+                                    alt="ImageName"
                                     src={val.secureUrl}
                                 />   
 
@@ -236,13 +229,14 @@ const Photos = () => {
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                             </svg>
                                         </button>
-                                        <a href={val.secureUrl}
-                                            className="mr-2 hover:text-green-600 duration-300">                                            
-                                            {/*<UrlImageDownloader imageUrl={val.secureUrl}/>*/}
+                                        <button
+                                            onClick={() => saveAs(val.secureUrl, 'image')}                                            
+                                            className="mr-2 hover:text-green-600 duration-300"
+                                        >                                                                                        
                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                                             </svg>
-                                        </a>
+                                        </button>
                                     </div>                                                                                                   
                                 </div>   
 
