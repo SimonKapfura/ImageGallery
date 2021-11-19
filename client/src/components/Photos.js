@@ -147,12 +147,12 @@ const Photos = () => {
     return (
         <div>
             {/* navbar */}
-            <div className="w-full flex items-center justify-between flex-wrap bg-black pl-6 pr-6 pt-3 pb-3">
+            <div className="photo-nav w-full flex items-center justify-between flex-wrap bg-black pl-6 pr-6 pt-3 pb-3">
                 <div className="w-1/5 flex items-center justify-center flex-shrink-0 text-white mr-6">
                     <img className="fill-current h-8 w-8 mr-1" src="../logo.svg" alt="" />
                     <span className="font-semibold text-xl tracking-tight"><b>Com</b>gallery</span>
                 </div>
-                <div className="w-1/5 flex items-center justify-around">
+                <div className="email-logout w-1/5 flex items-center justify-around">
                     <p className="text-white">{user}</p>
                     <button onClick={logout}
                         className="text-white rounded-lg px-2 py-1 bg-red-500 hover:bg-red-800 duration-300"
@@ -162,7 +162,7 @@ const Photos = () => {
                 </div>                
             </div> 
             {/* second nav */}
-            <div className="w-full flex items-center justify-around flex-wrap bg-gray-900 pl-6 pr-6 pt-2 pb-2 text-white">
+            <div className="second-nav w-full flex items-center justify-around flex-wrap bg-gray-900 pl-6 pr-6 pt-2 pb-2 text-white">
                 <div className="flex justify-around items-center w-2/5">
                     <input 
                         className="cursor-pointer bg-gray-700 rounded-lg shadow"
@@ -175,7 +175,8 @@ const Photos = () => {
                     </button>
                 </div>
                 <h1 className="w-1/5"
-                    style={{color: color}}>{status}</h1>
+                    style={{color: color}}>{status}
+                </h1>
             </div>    
             <div className="flex w-full justify-start items-center px-10 py-1">
                 <h1 className="font-bold text-2xl">Photos</h1>         
@@ -184,7 +185,7 @@ const Photos = () => {
                     onClick={showImages}>Reload images
                 </button> 
             </div>     
-            <div className="grid 2xl:grid-cols-6 grid-cols-4 gap-4 grid-flow-row px-4 pb-6">
+            <div className="images-grid grid 2xl:grid-cols-6 grid-cols-4 gap-4 grid-flow-row px-4 pb-6">
                 {imagesList.map((val, key) => {
                     return (                    
                         <div>

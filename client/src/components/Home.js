@@ -6,7 +6,7 @@ const Home = () => {
     return (
         <div className="w-full h-screen flex items-center flex-col bg-cover bg-right" style={{backgroundImage: "url("+ "../bg.svg" +")"}}>
             {/* nav */}
-            <div className="w-full h-1/6 container p-6 flex">
+            <div className="logo-div w-full h-1/6 container p-6 flex">
                 <div className="w-1/4 flex items-center justify-center flex-shrink-0 text-black">
                     <img className="fill-current h-14 w-14 mr-1" src="../logo.svg" alt="" />
                     <span className="font-semibold text-2xl tracking-tight"><b>Com</b>gallery</span>
@@ -14,9 +14,9 @@ const Home = () => {
             </div>
 
             {/* main */}
-            <div className="container w-full h-5/6 px-8 flex flex-wrap flex-col items-center justify-center">
+            <div className="content-div container w-full h-5/6 px-8 flex flex-wrap flex-col items-center justify-center">
                 {/* left column */}
-                <div className="w-2/5">
+                <div className="left-column lt-col w-2/5">
                     <h1 className="my-4 text-3xl font-bold text-blue-900">Welcome to Comgallery</h1>
                     <p className="mb-8">Here you can upload your photos and manage them. Just login or Register if you don't have an account with us</p>
                     <div className="flex w-full justify-start">
@@ -29,7 +29,7 @@ const Home = () => {
                     </div>                    
                 </div>    
                 {/* right column*/}
-                <div className="w-3/5 h-full">
+                <div className="right-column w-3/5 h-full">
                     <img className="w-full h-full" src="../side_photo.png" alt="" />
                 </div>
             </div>

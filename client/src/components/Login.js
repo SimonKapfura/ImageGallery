@@ -47,7 +47,7 @@ const Login = () => {
     return (
         <div className="w-full h-screen flex items-center flex-col bg-cover bg-right" style={{backgroundImage: "url("+ "../bg.svg" +")"}}>
             {/* nav */}
-            <div className="w-full h-1/6 container p-6 flex">
+            <div className="logo-div w-full h-1/6 container p-6 flex">
                 <div className="w-1/4 flex items-center justify-center flex-shrink-0 text-black">
                     <img className="fill-current h-14 w-14 mr-1" src="../logo.svg" alt="" />
                     <span className="font-semibold text-2xl tracking-tight"><b>Com</b>gallery</span>
@@ -55,9 +55,9 @@ const Login = () => {
             </div>
 
             {/* main */}
-            <div className="container w-full h-5/6 px-8 flex flex-wrap flex-col items-center justify-center">
+            <div className="content-div container w-full h-5/6 px-8 flex flex-wrap flex-col items-center justify-center">
                 {/* left column */}
-                <form className="w-2/5 px-8" onSubmit={(e) => {login(e)}}>
+                <form className="left-column w-2/5 px-8" onSubmit={(e) => {login(e)}}>
                     <h1 className="my-4 text-3xl font-bold text-blue-900 uppercase">Login</h1>
                     <div className="w-full mb-4">
                         <label className="block font-bold mb-2">Email</label>
@@ -90,7 +90,7 @@ const Login = () => {
                     </div>                                                              
                 </form>
                 {/* right column*/}
-                <div className="w-3/5 h-full">
+                <div className="right-column w-3/5 h-full">
                     <img className="w-full h-full" src="../side_photo.png" alt="" />
                 </div>
             </div>                                                        
