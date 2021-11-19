@@ -92,8 +92,7 @@ const Login = () => {
                 <div className="w-3/5 h-full">
                     <img className="w-full h-full" src="../side_photo.png" alt="" />
                 </div>
-            </div>
-                                                        
+            </div>                                                        
         </div>        
     )
 }

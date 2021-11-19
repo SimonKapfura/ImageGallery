@@ -162,7 +162,7 @@ app.get('/images', (req, res) => {
             console.log(err)
         } else {                        
             res.send(result)  
-            console.log(result)          
+            console.log(result)            
             //console.log(app.get('id'))
         }
     })     
@@ -173,7 +173,7 @@ app.put('/update', (req, res) => {
     const publicId = req.body.publicId
     cloudinary.uploader.rename(publicId, newPublicId, (error, result) => {
         if(error) {
-            console.log(err)
+            console.log(error)
         } else {
             console.log(result)
             db.query('UPDATE photo SET publicId = ? WHERE publicId = ?', [newPublicId, publicId], (err, new_result) => {
