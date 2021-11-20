@@ -178,6 +178,7 @@ const Photos = () => {
                     style={{color: color}}>{status}
                 </h1>
             </div>    
+            {/* photos title and reload images*/}
             <div className="flex w-full justify-start items-center px-10 py-1">
                 <h1 className="font-bold text-2xl">Photos</h1>         
                 <button
@@ -185,11 +186,14 @@ const Photos = () => {
                     onClick={showImages}>Reload images
                 </button> 
             </div>     
+            {/* images on a display grid */}
             <div className="images-grid grid 2xl:grid-cols-6 grid-cols-4 gap-4 grid-flow-row px-4 pb-6">
                 {imagesList.map((val, key) => {
                     return (                    
                         <div>
+                            {/* for one image */}
                             <div className="w-full rounded p-2 bg-gray-900 text-white">
+                                {/* image name or public id and the image itself */}
                                 <div className="flex items-center pb-1">
                                     <p>{val.publicId}</p>
                                 </div>
@@ -198,21 +202,26 @@ const Photos = () => {
                                     alt="ImageName"
                                     src={val.secureUrl}
                                 />   
-
+                                {/* functional buttons for edit, delete, download, and share */}
                                 <div className="w-full h-0/5 mt-2 rounded flex items-center justify-between">
+                                    {/* edit hover state and drop down menu to the top */}
                                     <div className="dropdown inline-block relative">
+                                        {/* edit icon and button, hover shows textbox and update button */}
                                         <button className="flex hover:text-blue-600 duration-300">
                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                             </svg>
                                         </button>
-                                        <div className="dropdown-menu absolute hidden rounded bg-gray-700 p-1">
+                                        {/* edit textbox and update */}
+                                        <div className="dropdown-menu absolute hidden rounded bg-gray-700 p-1 bottom-full">
+                                            {/* update textbox */}
                                             <input 
                                                 className="shadow py-1 px-2 border rounded focus:outline-none focus:ring focus:border-blue-900 text-black"
-                                                type='text' placeholder='Update public id' onChange={(event) => {
+                                                type='text' placeholder='Update public id or name' onChange={(event) => {
                                                 setNewPublicId(event.target.value);
                                             }}/>
                                             <div className="flex items-center justify-between">
+                                                {/* update button */}
                                                 <button 
                                                     className="mr-2 rounded-lg px-3 py-1 mt-1 bg-blue-800 text-white hover:bg-blue-900 duration-300"
                                                     onClick={() => {updateImage(val.publicId)}}>Update
@@ -223,13 +232,15 @@ const Photos = () => {
                                         </div>     
                                     </div>    
                                     <div className="flex">
-                                        <button 
+                                        {/* delete button */}
+                                        <button
                                             className="mr-2 hover:text-red-600 duration-300"
                                             onClick={() => {deleteImage(val.publicId)}}>
                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                             </svg>
                                         </button>
+                                        {/* download button */}
                                         <button
                                             onClick={() => saveAs(val.secureUrl, 'image')}                                            
                                             className="mr-2 hover:text-green-600 duration-300"
@@ -238,9 +249,17 @@ const Photos = () => {
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                                             </svg>
                                         </button>
+                                        {/* share button, copies to clipboard */}
+                                        <button
+                                            className="hover:text-blue-600 duration-300"
+                                            onClick={() => navigator.clipboard.writeText(val.secureUrl)}
+                                        >
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                                            </svg>
+                                        </button>
                                     </div>                                                                                                   
                                 </div>   
-
                             </div>
                         </div>                                        
                     )
