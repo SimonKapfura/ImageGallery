@@ -105,7 +105,7 @@ const Photos = () => {
             uid: id
         }).then((response) => {
             setImagesList(response.data)
-            console.log(response.data.publicId)
+            //console.log(response.data.publicId)
         })
     }
 
@@ -138,7 +138,7 @@ const Photos = () => {
     useEffect(() => {        
         axios.get('http://localhost:5000/images').then((response) => {
             setImagesList(response.data)
-            console.log(response.data)            
+            //console.log(response.data)            
         })
     }, [])
 

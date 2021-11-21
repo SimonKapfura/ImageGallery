@@ -3,23 +3,11 @@ const mysql = require('mysql');
 const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const morgan = require('morgan');
 const session = require('express-session');
 const cloudinary = require('cloudinary').v2;
 const cors  = require('cors');
-const ejs = require('ejs');
-const path = require('path');
-const localstorage = require('node-localstorage');
-const store = require('store2');
-const router = express.Router();
-const jwt = require('jsonwebtoken');
-const fs = require('fs');
-const request = require('request')
-const fetch = require('fetch');
 
 const app = express();
-
-const oneDay = 1000 * 60 * 60 * 24;
 
 const saltRounds = 10;
 
@@ -148,7 +136,7 @@ app.post('/upload', (req, res) => {
     db.query(sql, data, (err, result) => {
         if(err){
             res.send({error: 'Upload unsuccessful'})
-            console.log(err)
+            //console.log(err)
         }else{
             res.send({message: 'Successfully uploaded'})
         }    
@@ -159,7 +147,7 @@ app.get('/images', (req, res) => {
     const log_user = app.get('id');
     db.query('SELECT * FROM photo WHERE user_id = ?', [log_user], (err, result) => {
         if(err){
-            console.log(err)
+            console.log(err)        
         } else {                        
             res.send(result)  
             console.log(result)            
